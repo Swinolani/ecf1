@@ -34,7 +34,7 @@
             type="text"
             name="nomModif"
             class="inputModif"
-            v-model="nomModif"
+            :value="projet.pro_nom"
             readonly
           />
           - Description :
@@ -42,7 +42,7 @@
             type="text"
             name="descModif"
             class="inputModif"
-            v-model="descModif"
+            :value="projet.pro_desc"
             readonly
           />
           <input
@@ -71,8 +71,10 @@ let listeProjets = ref([]);
 let nom = ref("");
 let description = ref("");
 let message = ref("");
+// Pas utilisé
 let nomModif = ref("");
 let descModif = ref("");
+// ------------
 const nomToken = localStorage.getItem("token");
 let pseudoRecup = "";
 
@@ -92,6 +94,7 @@ function parseJwt(token) {
   return JSON.parse(jsonPayload);
 }
 
+//Fonction pour mettre a jour en direct la liste des projets sur la page
 async function updateListeProjets() {
   try {
     const response = await axios.get("http://localhost:3000/listeProjets", {
@@ -131,7 +134,8 @@ function submitProjet() {
   nom.value = "";
   description.value = "";
 }
-// -----------------------------------------------
+
+//Fonction non utilisé
 function updateOrDelete(event) {
   const form = event.target;
 
